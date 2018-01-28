@@ -34,10 +34,11 @@
         <!-- ng-map center="{{vm.marker.position.lat}}, {{vm.marker.position.lng}}"  problem is that this 
         doesn't include all of the markers then -->
 
-        <ng-map id="map" zoom-to-include-markers="false" zoom="5" center="{{vm.userLocation.data}}"
+        <ng-map id="map" zoom-to-include-markers="false" zoom="5" center="{{vm.center.data}}"
         geo-fallback-center="[40.74, -74.18]">
             <!-- <marker ng-repeat="place in vm.cities.list" position="{{place.pos}}" on-click=""></marker> -->
             <marker ng-show="vm.place.geometry" position="[{{ vm.place.geometry.location.lat() }}, {{ vm.place.geometry.location.lng() }}]"></marker>
+            <marker ng-show="vm.userLocation.data" position="[{{vm.userLocation.data[0]}}, {{vm.userLocation.data[1]}}]"></marker>
             <fusion-tables-layer ng-show="showEarthquakes" query="{ select: 'location',
   from: '1xWyeuAhIFK_aED1ikkQEGmR8mINSCJO9Vq-BPQ'}" , heatmap="{enabled: true}">
             </fusion-tables-layer>

@@ -8,7 +8,9 @@ app.controller('myController', ['$q', '$http', 'NgMap', '$scope', function ($q, 
     var key = config.MAPS_KEY;
     self.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + key;
     var myLatLng = { lat: -25.363, lng: 131.044 };
-    self.userLocation = { data: [0, 0] };
+    self.userLocation = { data: [] };
+    self.center = { data: [50, -100]}; //need an initial value.  I tried assigning the map center to
+    //self.userLocation.data, but because it is undefined on page load, it made the map load weird.
 
     $q(function (resolve, reject) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -22,6 +24,7 @@ app.controller('myController', ['$q', '$http', 'NgMap', '$scope', function ($q, 
         console.log(position.coords.latitude);
             self.userLocation.data[0] = (position.coords.latitude);
             self.userLocation.data[1] = (position.coords.longitude);
+            self.center.data = self.userLocation.data;
             $scope.$apply();
     }
 
